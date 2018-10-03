@@ -36,40 +36,39 @@ class html {
 
 class csv {
     static public function getRecords($filename) {
-      $file = fopen($filename, "r");
-      $fieldNames = array();
-      $count = 0;
-      while(! feof($file)){
-           $record = fgetcsv($file);
-           if($count == 0) {
-               $fieldNames = $record;
-           } else {
-               $records[] = recordFactory::create($fieldNames, $record);
-           }
-           $count++;
-       }
+        $file = fopen($filename,"r");
+        $fieldNames = array();
+        $count = 0;
+        while(! feof($file))
+        {
+            $record = fgetcsv($file);
+            if($count == 0) {
+                $fieldNames = $record;
+            } else {
+                $records[] = recordFactory::create($fieldNames, $record);
+            }
+            $count++;
+        }
         fclose($file);
         return $records;
     }
+
 }
 class record {
-    public function __construct(Array $fieldNames = null, $values = null ){
+    public function __construct(Array $fieldNames = null, $values = null )
+    {
         $record = array_combine($fieldNames, $values);
-        foreach ($record as $property => $value){
-            $this->createProperty($property, $values);
+        foreach ($record as $property => $value) {
+            $this->createProperty($property, $value);
         }
-
-
-}
-    public function returnArray(){
-     $array = (array) $this;
-        return $array;
-
     }
-
-    public function createProperty($name = 'first', $value = 'Keith') {
+    public function returnArray() {
+        $array = (array)$this;
+        return $array;
+    }
+    public function createProperty($name = 'first', $value = 'keith') {
         $this->{$name} = $value;
-}
+    }
 
 }
 class recordFactory{
