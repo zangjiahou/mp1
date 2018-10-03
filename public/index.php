@@ -14,13 +14,12 @@ class main {
        }
 
 }
-class html
-{
-    public static function generateTable($records)
-    {
+class html {
+
+    public static function generateTable($records) {
         $count = 0;
         foreach ($records as $record) {
-            if ($count == 0) {
+            if($count == 0) {
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
@@ -28,13 +27,13 @@ class html
                 print_r($values);
             } else {
                 $array = $record->returnArray();
-                $value = array_values($array);
+                $values = array_values($array);
                 print_r($values);
             }
             $count++;
         }
-    }
-}
+    }}
+
 class csv {
     static public function getRecords($filename) {
       $file = fopen($filename, "r");
@@ -54,7 +53,7 @@ class csv {
     }
 }
 class record {
-    public function construct(Array $fieldNames = null, $values = null){
+    public function __construct(Array $fieldNames = null, $values = null ){
         $record = array_combine($fieldNames, $values);
         foreach ($record as $property => $value){
             $this->createProperty($property, $values);
@@ -63,7 +62,7 @@ class record {
 
 }
     public function returnArray(){
-     $array = (array)
+     $array = (array) $this;
         return $array;
 
     }
@@ -75,8 +74,6 @@ class record {
 }
 class recordFactory{
     public static function create(Array $fieldNames = null, $record = null) {
-       print_r($fieldNames);
-       print_r($record);
          $record = new record($fieldNames, $record);
     return $record;
     }
