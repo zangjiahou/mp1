@@ -6,33 +6,33 @@
  * Time: 8:51
  */
 
-main::start();
+main::start("example.csv");
 class main {
     static public function start($filename) {
         $records = csv::getRecords($filename);
-       foreach ($records as $record) {
-           $array = $record->returnArray();
-           print_r($array);
-       };
-    }
+       $table = html::generateTable($records);
+       }
+
 }
-class html {
-    public static function generateTable($records){
+class html
+{
+    public static function generateTable($records)
+    {
         $count = 0;
         foreach ($records as $record) {
-         if($count==0){
-             $array = $record->returnArray();
-             $fields = array_keys($array);
-             $values = array_values($array);
-             print_r($fields);
-             print_r($array);
-
-
-         }
-
-             $array = $record->returnArray();
-             print_r($array);
-         }
+            if ($count == 0) {
+                $array = $record->returnArray();
+                $fields = array_keys($array);
+                $values = array_values($array);
+                print_r($fields);
+                print_r($values);
+            } else {
+                $array = $record->returnArray();
+                $value = array_values($array);
+                print_r($values);
+            }
+            $count++;
+        }
     }
 }
 class csv {
